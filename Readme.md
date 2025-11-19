@@ -3,7 +3,7 @@
 This is my first project of professional backend with javascript
 - [Model link] (https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
 
-First create the folder , then add package.json using commands
+- First create the folder , then add package.json using commands
 ADD readme.md
 Create repo in git and push the code to git.
 
@@ -56,3 +56,63 @@ Create repo in git and push the code to git.
 .env.*
 
 
+## How to connect database in MERN with debugging-
+
+Database to connect securely , ache s
+- Here we are using databse ,mongo db , you can also use docker , fullflegit ...but here we use online mongodb
+- go google , search mongo fb atlas,they r giving online shared  database service free
+- create acount free, create project free, choose mumbai , create username , pssword, they ask - where u wantto connect choose - my local environment.... add entries to ip list - add in ip address - 0.0.0.0/0. ..finish and close ...it will create....
+- in network access tab - you will see your ip addres if not present , add it ...and in production  seetiing you cant choose allow access from anywhere ...but if any testing needed you can for temporirly for 3-6 hrs something , this is very cautious step ... but here we can do since we are testing and learning here
+- in database access tab - if yours not added , add new user and fill ur details.
+  
+- Now go inside database  under deploymnet - click on connect , every options u will find string that we need to connect .
+
+# then go to project directory :
+
+- go to env file: write following PORT=8000 MONGODB_URI= 
+- go to constants file , write db name and export it. ....here we add with constant bcz we cant change db name in future by me or sm1....it can be let or any environment variable
+
+# Database connection can be do form 2 ways : 
+- 1 approach is all code svae in index file , since we are first executing index file through node or nodemon , jaise h index file load ho wiase hi mera sara code run kra do jo maine database ka code likha hai turnt execute ho jye
+-  2 approach is Ek DB name ka folder bnaye uske andr connection ka code function usme likhe and then import. taht funciton on index file and execute kraye ..
+- so, pros and cons , if we write separtely code clean and distribute rhega jo ki porfessionally hai
+
+ app.js will do from express
+ and index.js connection hoga mongoose k through
+
+# now install few pakages :  npm i mongoose express dotenv 
+and check its installed or not on pakcge.json
+
+# * note:
+* whenever u want to talk with datase , always use and wrap in try-catch or use promises bcz error aayi to resolve reject s handle ho jyega
+* database is always in another continent means like db is in usa and uding here means it takes time so always use try catch and async - await .
+  
+# lets connnect db from first approach :
+using index.js
+// function connectDB(){}
+// connectDB()
+//this is also but we can make it professional so we use efi concept in js , function hai use immediate execute krdo , arrow function ,which execute immediately add async...sometime coders add ; semicoplpn in starting when efe's starting just bcz editor forget to add semicolon in last colon , so basicaaly professional do good pratices and add like this: ;( async () => {})()...here we r not using bcz we dont have any code before
+
+then connect database connection like below syntax:
+          mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`) //
+//process.env.MONGODB_URI=process se lo, and name jo diya hai string ...database connect ... uske aage slash and databse ka name bhi dena pdta hai to constant.js m name define kiya hai to use import kra lenge ... add slash and variable name...then database connect
+async await is mandatory
+
+/* 2nd approach is professional approach , we take separate file for connection do connection there under any folder like db and import here which is good practice.
+*/
+
+# first approach
+this is also but we can make it professional so we use efi concept in js , function hai use immediate execute krdo , arrow function ,which execute immediately add async...sometime coders add ; semicoplpn in starting when efe's starting just bcz editor forget to add semicolon in last colon , so basicaaly professional do good pratices and add like this: ;( async () => {})()...here we r not using bcz we dont have any code before
+//we can create efe and database me asych await and try ctach used here error bhi handle kiya hai
+---- Below code is first approach but we commented bcz index.js file me hi sara code hai --- comment on index.js file
+
+# 2nd approach
+- Create index.js file under db folder.
+- here we connect db through mongoose and write code in this file 
+-  dotenv variables are environment variable hote hai jo as early as possible import and configure all environment variable application m load ho jane chhiye
+-  so intead of required dotenv we use import here
+-    and in packahge.json me ye add krenge - "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+-  do debugging jb db connect ni ho to node js me import me .js lagana pdega...or jb bhi environment vairabkle m change krenge to restart krna hi pdega npm dev run s
+-  bassicllly i connected db succesfully 
+
+  
