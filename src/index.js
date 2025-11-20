@@ -13,7 +13,20 @@ dotenv.config({ //above format makeing difficult for code consistency so we can 
     path: './env'
 })
 
+
 connectDB()
+.then(() => {
+    app.on("error", (error) => { //added a callback here
+        console.log("ERR:" , error); 
+        throw error
+    })
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is running at Port: ${process.env.PORT}`)
+    })
+})
+.catch((err) =>{
+    console.log("MONGO DB connection failed..... ",err);
+})
 /* 2nd approach is professional approach , we take separate file for connection do connection there under any folder like db and import here which is good practice.
 */
 
