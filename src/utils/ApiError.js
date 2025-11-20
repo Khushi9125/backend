@@ -3,7 +3,7 @@ class ApiError extends Error { //class create
         statusCode, //statuscode zaruri h constructuror m
         message = "Something went wrong", //message jarori hai to ek likh diya
         errors = [], //errors agr multiple erro pass krni h to
-        statck = "" //eror statck 
+        stack = "" //eror statck 
     ){
         super(message) //overwriting here
         this.statusCode = statusCode //overwrite here
@@ -12,8 +12,8 @@ class ApiError extends Error { //class create
         this.success = false //succes msg is false bcz here handling error , uska flag false jyega but msg jyega
         this.errors = errors
 
-        if(statck){
-            this.stack = statck
+        if(stack){
+            this.stack = stack
         } else{
             Error.captureStackTrace(this,this.construtor) //stacktrack me uska instance pas kr diya h
         }
