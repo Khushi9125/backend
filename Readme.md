@@ -114,5 +114,68 @@ this is also but we can make it professional so we use efi concept in js , funct
 -    and in packahge.json me ye add krenge - "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
 -  do debugging jb db connect ni ho to node js me import me .js lagana pdega...or jb bhi environment vairabkle m change krenge to restart krna hi pdega npm dev run s
 -  bassicllly i connected db succesfully 
+-  
 
+### Custom api response and error handling
+- app.js - importing express , express s app bnti hai ,app is common name add listen part
+- index.js/db add error part and all to handle errors
+- few packge required: 
+  cookie-parser
+  cors ---setting krne deta hai jo hmare cross origin resources h unke liye
+- app.use() - will only use jb koi middleware or configuration use krni h
+- Install above pckge: npm i cookie-parser cors
+- the import in app.js
+- setting cors with orgin and creds.
+- now setting cookise parswr we ned to use throw expressjson to by limiting to 16kb
+- url ka personal encoder hota ha like url m kbhi kbhi % bhi hota hoi uske liye express s configuration krni hoga through app.use with urlencoded
+- we want to add one more configuration app.use m static likheneg jo assets like pdf, images , fevicon and all ko stor ekrnge ..under static pass folder name.
+# Middleware: -------
+- a client will hit your url --- mans seding request ...to maine ek code likh rkha hai (req,res), to hm wahan pr koi res.send  response send krenge ...bcz url pr request to bhut ayengi islie hum uske bech me ek check lagynge ki wo aap cpaable ho ki nhi , usi checking ko middleware bolte hai ....like between both  re and res check lga is user is logged in ...we can add multiple middleware ... inko lagane ka sequence hota hai...
+- re,res are not 2 , they r 4 elements = (err,req,res,next) ---next = is a middleware ye ek flag hota hai , jo apna code likh deta hai wo pass krta hai next to second middleware aise hi hoga aage bhi last m final jb koi next ni hoga to response hi hoga waha pr next discard ho juyega.
+
+* async await try catch to mandatory hota hai db s hmesha bat krenge hr case to utilty m file bna lete hai jiska syntax same hota ai hr bar ni likhna pdega to iske generalizer function bna kr wrapper lga le..ye industry comon practice hai ..
+1. first method:
+   - create asyncHandler.js file in utils and asynchhandler function bnynge ....aynchhandler is a higer order function in js ...those fucntion jo as parameter bhi accpt krte hai and return bhi like variable treat krte hai .
+2. prmoise mthod 2nd one here we use 2nd only
+* node js api error pdh kr use standardize kr skte h
+- Create a apiError.js file under utils wo erro ko handle krenge
+- Create a apiresponse.js file under utils also  response ko handle krnge ---statuscode pass krnege usko read krna h errorcode ....
+- ------status code actually m less than 400 hone chahiy actually standard set krna h basicclly.... 400 s jyda error m hi bhejne chhaiye
   
+
+## User and video model with hooks and JWT
+- create user.models.js file under models
+- create video.models.js file under models
+- 2 models here - users and video model
+- mongo db data save krta h user ko automaticcly id genearte krta hai , bson m data store krt ahai mongo db not in jspon
+- avtar and cover image will upload on 3rd party service nd it will provide url to uoload like aws , cloudnarry
+* //agr kisi bhi field ko searchable banana hai to index true krdo , taki db ki searching m aane lge
+- write model in users and vudeo 
+- then baisc db query to likhenge but here we use one packge aggregrate mongoose ka pakcge , ye aggreagration ka query lukhne m help krta hai so we install here  ---- npm install mongoose-aggregate-paginate-v2
+use in video.models.js it works like a plug in- 
+- install bcrypt ///its a library which helps you hash your password...
+- for tokens: jwt library and jsonwebtoken ...cryptographichal algo s bnaye jate hai 
+- so install : npm i bcrypt jsonwebtoken
+- and import in user.js
+- so how to crypt : so we need take help from mongoose hooks: 
+  - pre hook : pre is a middleware jaise data hi save hone ja rha hoga usse just phle run kra skte hai...like pasword encrypt krde
+- mongoose giving us ki custom methods bhi bana skte hai
+## JWT:
+- Jwt is a bearer token ....jwebjsontoken library bna kr deti hai 
+- Add in .env:
+  ACCESS_TOKEN_SECRET= #token to add
+  ACCESS_TOKEN_EXPIRY= #1day expiry
+  REFRESH_TOKEN_SECRET=#token to add
+  REFRESH_TOKEN_EXPIRY=
+- like this we can add accesstpoken generate method we can add in user.mode.js file
+- then we genrate access and referesh token thorugh function and jwt.
+  
+# How to upload file in backend | Multer
+- create account in clpudianry, cloudinary is a service like aws its also a s3
+- install cloudinary and multer: npm i cloudinary multer
+- user will upload file, we will upload through multer and take frile from user and tempory store in our local server ..then suing cloudinary us local storage s file lkr multer pr upload kra de... //best prod practices - bcz hm isko apne server m save kr ske bcz its a 2-step we can directluy upload to cloudinary ...but server m local save krte h bcz kbhi kbhi reattempt kr pye agr aisa case h to taki hm use upload kr pye...its a prod practic - 2 steps 
+- create cloudinary.js file in utils to store images 
+- import fs from "fs" = file system library jo node.js m sath aati hai read and write open path and all
+- write uploading code in cloudarny.
+- now we need to create a middleware , using multer we can create a middleware...wherever images/file upload required we can add middleware
+- create under middleware folder file multer.middleware.js and import multer and add muleter code thorugh express multer doc 
