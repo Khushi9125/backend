@@ -26,7 +26,7 @@ const userSchema = new Schema(
             trim: true,
             index: true,
         },
-        avtar: {
+        avatar: {
             type: String, //cloudinary m upload krke ka url use krenge
             required: true,
         },
@@ -35,7 +35,7 @@ const userSchema = new Schema(
         },
         watchHistory: [
             {
-                type: Schema.mongoose.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: "Video" //refernce or ref is same
             }
         ],
