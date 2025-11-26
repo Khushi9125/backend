@@ -3,15 +3,16 @@
 // import { DB_NAME } from "./constants";
 //import connectDB from "./db";  this will give error ye iport ni krta directly so add /index.js like below  error will change db load hua but constant file load ni hua  jo we need to add constants.js there
 
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import connectDB from "./db/index.js";  
-
-
+import { app } from "./app.js";
 
 dotenv.config({ //above format makeing difficult for code consistency so we can use like this so
 
-    path: './env'
+    path: './.env'
 })
+console.log("Loaded PORT:", process.env.PORT);
+
 
 
 connectDB()

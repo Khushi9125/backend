@@ -179,3 +179,33 @@ use in video.models.js it works like a plug in-
 - write uploading code in cloudarny.
 - now we need to create a middleware , using multer we can create a middleware...wherever images/file upload required we can add middleware
 - create under middleware folder file multer.middleware.js and import multer and add muleter code thorugh express multer doc 
+
+
+# HTTP headers
+http.md - file
+
+# Complete guide for router and controller with debugging
+* jitne jyda controller likhenge utna zyda logic building hongi
+## Here we learn how to do register?
+- Create files under controlllers folder - user.controller.js
+- Controller k andr hme krna h ...we write ek handler file asynchandler.js jisme wrapper bna rkha hai 
+- user.controller.js me code likhenge..
+- now write routes , so under route folder , user.routes.js file create krnge.. usme router bnynge then export all..
+- now in app.js m routes ko add krnge connct k liye
+  inh 3 files ka connection bnynge
+app.use("/users", userRouter) // jaise hi koi /user likhega ye route kr dega userrouter pr 
+- app.js me
+// "/users" --- jo hoga wo Prefix hota hai so .. url bnega
+// http://localhost:8000/users --- jaise hi /users pr gye to uska control /register pr jyega to ye below url bn jyega
+//http://localhost:8000/users/register
+//http://localhost:8000/users/login -- for login its a gud practice... 
+so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad routes likhnge wo user.routes.js m hoga..
+- Whenever u r defining your API, you need to tell version od API...good practices ha... like this //http://localhost:8000/api/v2/usersusers/login 
+- Now we need to run it will run ...
+- Code run in postman :
+ http://localhost:8000/api/v1/users/register ---O/p: ok code run here
+ http://127.0.0.1:8000/api/v1/users/test ---"api working here"
+
+
+ 
+
