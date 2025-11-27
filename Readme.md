@@ -243,6 +243,24 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
             "success": true
         }
 
-- after uploaded file in cloudinary we need to unlink file from cloundianary if sucessfull and if error
+- after uploaded file in cloudinary we need to unlink file from cloundianary if sucessfull and if error and run eveyrthung in postman and test the cases
 
+# Access Refresh Token, Middleware and cookies in Backend
+
+## acesstoken -short lived
+## referestoken -long lived
+- Here we are creating login user. in user.controoler.js file .
+- Below steps:
+- 1. req body -> data le aao
+  2. username or email to login
+  3. find the user
+  4. password check - if false throw wrong erroe
+  5. if password exists- access and refresh token generate
+  6. send in cookies
+  7. response send successfully login
+# Log out user 
+- 1. Remove cookies bcz ye server s hi hategi
+- 2. refrestoken present in model usko bhi reset krna hoga
+- Here we using middleware since anybody can logout through any mail so we add a check here ..
+- We are creating authentication middle so creating file auth.middleware.js
 

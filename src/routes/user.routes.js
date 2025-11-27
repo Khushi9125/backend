@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import { loginUser, logoutUser, registerUser } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 console.log("🔄 Initializing User Router...");
 
 
@@ -27,4 +28,9 @@ router.route("/register").post(
 //router.route("/login").post(login); //POST method used here
 console.log("User Router Ready!");
 
+
+router.route("/login").post(loginUser)
+
+//secured routes
+router.route("/logout").post(verifyJWT, logoutUser)
 export default router;
