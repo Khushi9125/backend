@@ -264,3 +264,8 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
 - Here we using middleware since anybody can logout through any mail so we add a check here ..
 - We are creating authentication middle so creating file auth.middleware.js
 
+- Then we test login/register/logout routes 
+
+# Handling refresh and acces token
+- Creating end point in controller.js file
+- refresh token we can get from cookies since its save in cookies only

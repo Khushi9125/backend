@@ -52,20 +52,22 @@ const userSchema = new Schema(
     }
 )
 
-userSchema.pre("save" , function (next) { //save event,
-    if(!this.isModified("password")) return next() //we are checking here in save event jb sva ebutton click hogi bcz jb koi password m aaye tbgi bcrypt ho othjerwise return ho jye ..without to jb koi save evnt hit hoga hr bar password bcrypt ho jyeg that problem so added if conditon ...checking negative
+userSchema.pre("save" , async function (next) { //save event,
+    console.log("👉 Before hashing password:", this.password); // DEBUG
+    if(!this.isModified("password")) return next(); //we are checking here in save event jb sva ebutton click hogi bcz jb koi password m aaye tbgi bcrypt ho othjerwise return ho jye ..without to jb koi save evnt hit hoga hr bar password bcrypt ho jyeg that problem so added if conditon ...checking negative
     
-    this.password = bcrypt.hash(this.password, 10) //kitne hash rounds lgaye like 8,10
-    next() //
+    this.password = await bcrypt.hash(this.password, 10); //kitne hash rounds lgaye like 8,10
+    console.log("👉 After hashing password:", this.password); // DEBUG
+    next(); //
 }) 
 
 userSchema.methods.isPasswordCorrect = async function (password) { //custom method in mongoose
-    return await bcrypt.compare(password, this.password) //bcrytpt will check here paswword using compare method in bcrypt library ...compare bolta hai ek password string m dosra encypt m dono ko comprae krega time lgta hai cryptography hai so await legga return krdo ...comprae true or false deta hai
+    return await bcrypt.compare(password, this.password); //bcrytpt will check here paswword using compare method in bcrypt library ...compare bolta hai ek password string m dosra encypt m dono ko comprae krega time lgta hai cryptography hai so await legga return krdo ...comprae true or false deta hai
 }
 
 //encryption below for generating access token
 userSchema.methods.generateAccessToken = function(){
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
@@ -76,12 +78,12 @@ userSchema.methods.generateAccessToken = function(){
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
-    )
+    );
 }
 //encryption below for generating refersh token, isme info k hoti bcz ye refersh hota rhta hai 
 
 userSchema.methods.generateRefreshToken = function(){ 
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
         },
@@ -89,7 +91,7 @@ userSchema.methods.generateRefreshToken = function(){
         {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
-    )
+    );
 }
 
 export const User = mongoose.model("User", userSchema)

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { loginUser, logoutUser, registerUser } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { refreshAccessToken } from "../controllers/user.controller.js";
 console.log("🔄 Initializing User Router...");
 
 
@@ -29,8 +30,9 @@ router.route("/register").post(
 console.log("User Router Ready!");
 
 
-router.route("/login").post(loginUser)
+router.route("/login").post(loginUser);
 
 //secured routes
-router.route("/logout").post(verifyJWT, logoutUser)
+router.route("/logout").post(verifyJWT, logoutUser);
+router.route("/refresh-token").post(refreshAccessToken);
 export default router;
