@@ -269,3 +269,7 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
 # Handling refresh and acces token
 - Creating end point in controller.js file
 - refresh token we can get from cookies since its save in cookies only
+
+  -----  Tested till here succesfully
+
+## Writing update controllers for user
