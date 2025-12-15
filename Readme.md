@@ -276,3 +276,11 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
 - Subscriptions is a separate entity in model.
 - user and channel both in suprscription, so we need to distinguish this bcz ye dono same ...subscriber m hi channel ko bhi add kr rhe and user ko bhi .
 - Go to models create one subscription model file with name subscription.model.sj in model folder and write model code od subscription which has entity : subscriber,channel and created at , updated at.
+  
+- Now we need to write the controllers for change current password.
+- Now ftech or get current user 
+
+- Now update details of account create another controller for this. whatever details you need to update.
+- Note: If any file needs to update , please create a separate a end point or controller. like user wants to update image end point hit krwa do to utna update hoga.
+- update avatar image
+- update cover image 
