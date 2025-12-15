@@ -273,3 +273,6 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
   -----  Tested till here succesfully
 
 ## Writing update controllers for user
+- Subscriptions is a separate entity in model.
+- user and channel both in suprscription, so we need to distinguish this bcz ye dono same ...subscriber m hi channel ko bhi add kr rhe and user ko bhi .
+- Go to models create one subscription model file with name subscription.model.sj in model folder and write model code od subscription which has entity : subscriber,channel and created at , updated at.
