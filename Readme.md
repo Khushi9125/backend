@@ -284,3 +284,14 @@ so phle user pr jyega uske bad wo differnt routes m jyega ..jo bhi user k bad ro
 - Note: If any file needs to update , please create a separate a end point or controller. like user wants to update image end point hit krwa do to utna update hoga.
 - update avatar image
 - update cover image 
+
+
+## Understand the  subscription schema
+
+## Learn Mongodb aggregation pipelines
+- write controller  getUserChannelProfile
+- Write different pipleines under this controller to fetch user detail
+
+## How to write sub pipelines and routes
+- To get watch history of user 
+- So write one controller for this getwatchHistory and add sub pipelines 
